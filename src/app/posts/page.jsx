@@ -2,12 +2,18 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import logo from "../../../public/assets/logo_file_rouge.png";
-
+import { useRouter } from "next/navigation";
 const Postpage = () => {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+  const handleClick = (id) => {
+    if (typeof id === 'string') {
+      router.push(`/${id}`);
+    }
   };
   return (
     <>
@@ -94,7 +100,9 @@ const Postpage = () => {
       </label>
       {/**  les posts*/}
       <section className="flex flex-row flex-wrap mx-auto mt-20">
-        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3">
+        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3" onClick={()=>{
+            handleClick('1');
+        }}>
           <div className="flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-blanc rounded-lg shadow-lg hover:shadow-2xl">
           <section className="px-4 py-2 mt-2 border-b border-black-maron">
               <div className="flex items-center justify-between">
@@ -189,7 +197,9 @@ const Postpage = () => {
           </div>
         </div>
 {/**second post */}
-        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3">
+        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3" onClick={()=>{
+            handleClick('2');
+        }} id="2">
           <div className="flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-blanc rounded-lg shadow-lg hover:shadow-2xl">
             <div className="md:flex-shrink-0">
               <img
