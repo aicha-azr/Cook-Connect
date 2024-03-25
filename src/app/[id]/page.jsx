@@ -66,11 +66,11 @@ const Post = ()=>{
         
         <div className="py-8">
             <h1 className="text-3xl font-bold mb-2">Blog post title</h1>
-            <p className="text-gray-500 text-sm">Published on <time datetime="2022-04-05" className="text-orange">April 5, 2022</time></p>
+            <p className="text-gray-500 text-sm">Published on <time dateTime="2022-04-05" className="text-orange">April 5, 2022</time></p>
         </div>
 
        
-        <img src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c" alt="Featured image" className="w-full h-auto mb-8"/>
+        <Image src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c" width='150' height='100' alt="Featured image" className="w-full h-auto mb-8"/>
 
         <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus varius fringilla augue, vel vestibulum
@@ -115,7 +115,7 @@ const Post = ()=>{
     </div>
     <form className="mb-6">
         <div className="py-2 px-4 mb-4 bg-bleu-ciel rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <label for="comment" className="sr-only">Your comment</label>
+            <label htmlFor="comment" className="sr-only">Your comment</label>
             <textarea id="comment" rows="6"
                 className="px-0 w-full bg-bleu-ciel text-sm text-black-maron border-0 focus:ring-0 focus:outline-none "
                 placeholder="Write a comment..." required></textarea>
@@ -132,10 +132,10 @@ const Post = ()=>{
                         className="mr-2 w-6 h-6 rounded-full"
                         src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                         alt="Bonnie Green"/>Bonnie Green</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
+                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate dateTime="2022-03-12"
                         title="March 12th, 2022" className="text-orange">Mar. 12, 2022</time></p>
             </div>
-            <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" onClick={() => toggleCommentMenu(1)}
+            <button id="dropdownComment1Button"  onClick={() => toggleCommentMenu(1)}
                 className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-bleu-ciel rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
                 <svg className="w-4 h-4 text-black-maron" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
@@ -168,7 +168,7 @@ const Post = ()=>{
             <button type="button"
                 className="flex items-center text-sm text-black-maron hover:underline dark:text-gray-400 font-medium">
                 <svg className="mr-1.5 w-3.5 h-3.5 text-black-maron" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
                 </svg>
                 Reply
             </button>
@@ -182,13 +182,13 @@ const Post = ()=>{
                         className="mr-2 w-6 h-6 rounded-full"
                         src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                         alt="Bonnie Green"/>Bonnie Green</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
+                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate dateTime="2022-03-12"
                         title="March 12th, 2022">Mar. 12, 2022</time></p>
             </div>
             <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3" onClick={() => toggleCommentMenu(3)}
                 className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-bleu-ciel rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
-                <svg className="w-4 h-4 text-black-maron" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                <svg className="w-4 h-4 text-black-maron"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                     <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                 </svg>
                 <span className="sr-only">Comment settings</span>
@@ -218,7 +218,7 @@ const Post = ()=>{
             <button type="button"
                 className="flex items-center text-sm text-black-maron hover:underline dark:text-gray-400 font-medium">
                 <svg className="mr-1.5 w-3.5 h-3.5 text-black-maron" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
                 </svg>
                 Reply
             </button>
@@ -228,6 +228,6 @@ const Post = ()=>{
   </div>
 </section>
         </>
-    )
+    ) 
 }
 export default Post;
