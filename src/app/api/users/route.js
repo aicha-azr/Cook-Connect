@@ -27,13 +27,13 @@ async function POST(req, res) {
     const body = await req.json();
     console.log(body.mot_de_passe);
     if (!(body.mot_de_passe)) {
-      return new Response.json({ message: 'Le mot de passe est requis' });
+      return  Response.json({ message: 'Le mot de passe est requis' });
     }
     const hashedPassword = await bcrypt.hash(body.mot_de_passe, 10);
     const newUser = new User({ nom:body.nom, email:body.email, mot_de_passe: hashedPassword });
     await newUser.save();
     console.log(newUser);
-    return new Response.json(newUser);
+    return  Response.json(newUser);
   } catch (error) {
     console.error('Erreur lors de la création de l\'utilisateur :', error);
     return new Response.json({ message: 'Erreur interne du serveur' });

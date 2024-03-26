@@ -1,99 +1,39 @@
 import Connect from '@/Connection/connection';
 import Post from '@/Models/postSchema';
-await Connect();
+Connect();
+// add a post
+async function POST(req, res) {
+  try {
+        const body = await req.json();
+        const newPost = new Post({
+          utilisateur: body.utilisateur,
+          titre: body.titre,
+          contenu: body.contenu,
+          images: body.images 
+        });
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    // Créer une nouvelle publication
-    try {
-      const { utilisateur, titre, contenu } = req.body;
-      const newPost = new Post({ utilisateur, titre, contenu });
-      await newPost.save();
-      res.status(201).json(newPost);
-    } catch (error) {
-      console.error('Erreur lors de la création de la publication:', error);
-      res.status(500).json({ message: 'Erreur interne du serveur' });
-    }
-  } else if (req.method === 'GET') {
-    // Obtenir toutes les publications
-    try {
-      const posts = await Post.find().populate('utilisateur');
-      res.status(200).json(posts);
-    } catch (error) {
-      console.error('Erreur lors de la récupération des publications:', error);
-      res.status(500).json({ message: 'Erreur interne du serveur' });
-    }
-  } else {
-    res.status(405).json({ message: 'Méthode non autorisée' });
-  }
-}
+        // Save the new post to the database
+        const savedPost = await newPost.save();
 
-export async function getById(req, res) {
-  await Connect();
-
-  if (req.method === 'GET') {
-    // Obtenir une publication par ID
-    try {
-      const postId = req.query.id;
-      const post = await Post.findById(postId).populate('utilisateur');
-      
-      if (!post) {
-        return res.status(404).json({ message: 'Publication non trouvée' });
+        // Respond with the created post
+        return Response.json(savedPost);
+      } catch (error) {
+        console.error('Erreur lors de la création du post :', error);
+        return Response.json({ message: 'Erreur interne du serveur' });
       }
-      
-      res.status(200).json(post);
-    } catch (error) {
-      console.error('Erreur lors de la récupération de la publication par ID:', error);
-      res.status(500).json({ message: 'Erreur interne du serveur' });
     }
-  } else {
-    res.status(405).json({ message: 'Méthode non autorisée' });
-  }
-}
-
-export async function update(req, res) {
-  await Connect();
-
-  if (req.method === 'PUT') {
-    // Mettre à jour une publication
-    try {
-      const postId = req.query.id;
-      const { utilisateur, titre, contenu } = req.body;
-      const updatedPost = await Post.findByIdAndUpdate(postId, { utilisateur, titre, contenu }, { new: true });
-
-      if (!updatedPost) {
-        return res.status(404).json({ message: 'Publication non trouvée' });
-      }
-
-      res.status(200).json(updatedPost);
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour de la publication:', error);
-      res.status(500).json({ message: 'Erreur interne du serveur' });
+ // get all posts
+ async function GET(req,res){
+  try{
+    const posts = await Post.find();
+    if(posts.length >= 1){
+      return Response.json(posts)
     }
-  } else {
-    res.status(405).json({ message: 'Méthode non autorisée' });
+    return Response.json({message: "no post found"}) 
+  }catch(error){
+    console.log('erreur: ',error);
+    return new Response.json({message: `Erreur interne du serveur: ${error}`})
   }
-}
+ } 
 
-export async function remove(req, res) {
-  await dbConnect();
-
-  if (req.method === 'DELETE') {
-    // Supprimer une publication
-    try {
-      const postId = req.query.id;
-      const deletedPost = await Post.findByIdAndDelete(postId);
-
-      if (!deletedPost) {
-        return res.status(404).json({ message: 'Publication non trouvée' });
-      }
-
-      res.status(200).json({ message: 'Publication supprimée avec succès' });
-    } catch (error) {
-      console.error('Erreur lors de la suppression de la publication:', error);
-      res.status(500).json({ message: 'Erreur interne du serveur' });
-    }
-  } else {
-    res.status(405).json({ message: 'Méthode non autorisée' });
-  }
-}
+module.exports = { POST, GET };
