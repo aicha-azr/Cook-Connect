@@ -132,7 +132,7 @@ const Post = ()=>{
                         className="mr-2 w-6 h-6 rounded-full"
                         src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                         alt="Bonnie Green"/>Bonnie Green</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate dateTime="2022-03-12"
+                <p className="text-sm text-gray-600 dark:text-gray-400"><time  dateTime="2022-03-12"
                         title="March 12th, 2022" className="text-orange">Mar. 12, 2022</time></p>
             </div>
             <button id="dropdownComment1Button"  onClick={() => toggleCommentMenu(1)}
@@ -182,7 +182,7 @@ const Post = ()=>{
                         className="mr-2 w-6 h-6 rounded-full"
                         src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                         alt="Bonnie Green"/>Bonnie Green</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate dateTime="2022-03-12"
+                <p className="text-sm text-gray-600 dark:text-gray-400"><time  dateTime="2022-03-12"
                         title="March 12th, 2022">Mar. 12, 2022</time></p>
             </div>
             <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3" onClick={() => toggleCommentMenu(3)}

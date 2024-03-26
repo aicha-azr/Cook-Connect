@@ -24,22 +24,19 @@ async function GET(req,res)
 async function POST(req, res) {
   try {
     await Connect();
-    const { nom, email, mot_de_passe } = req.body;
-    
-    // Hacher le mot de passe
-    const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
-
-    // Créer un nouvel utilisateur avec le mot de passe haché
-    const newUser = new User({ nom, email, mot_de_passe: hashedPassword });
-    
-    // Enregistrer le nouvel utilisateur
+    const body = await req.json();
+    console.log(body.mot_de_passe);
+    if (!(body.mot_de_passe)) {
+      return new Response.json({ message: 'Le mot de passe est requis' });
+    }
+    const hashedPassword = await bcrypt.hash(body.mot_de_passe, 10);
+    const newUser = new User({ nom:body.nom, email:body.email, mot_de_passe: hashedPassword });
     await newUser.save();
-    console.log(newUser)
-    // Retourner la réponse
-    return Response.json(newUser);
+    console.log(newUser);
+    return new Response.json(newUser);
   } catch (error) {
     console.error('Erreur lors de la création de l\'utilisateur :', error);
-    return Response.json({ message: 'Erreur interne du serveur' });
+    return new Response.json({ message: 'Erreur interne du serveur' });
   }
 }
 
