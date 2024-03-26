@@ -2,8 +2,8 @@ import Connect from '@/Connection/connection';
 import Post from '@/Models/postSchema';
 Connect();
 // add a post
-async function POST(req, res) {
-  try {
+  async function POST(req, res) {
+    try {
         const body = await req.json();
         const newPost = new Post({
           utilisateur: body.utilisateur,
@@ -17,12 +17,12 @@ async function POST(req, res) {
 
         // Respond with the created post
         return Response.json(savedPost);
-      } catch (error) {
+    }catch (error) {
         console.error('Erreur lors de la création du post :', error);
-        return Response.json({ message: 'Erreur interne du serveur' });
+        return Response.json({ message: 'Erreur interne du serveur' }, { status: HttpStatusCode.NotFound });
       }
-    }
- // get all posts
+  }
+// get all posts
  async function GET(req,res){
   try{
     const posts = await Post.find();
