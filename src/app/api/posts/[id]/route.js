@@ -43,7 +43,7 @@ async function PUT(req, { params }) {
 async function DELETE(req, {params}){
     try{
         const post = await Post.findByIdAndDelete(params.id);
-        if (!user) {
+        if (!post) {
             return NextResponse.json({ message: `post ${params.id} non trouvé` }, { status: HttpStatusCode.NotFound  });
         }
         await post.remove();
