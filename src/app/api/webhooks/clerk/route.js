@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
-import { createUser } from "@/lib/actions/user.action";
+const User =  require('@/Models/userSchema'); 
 
 export async function POST(req) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -77,7 +77,7 @@ export async function POST(req) {
 
     console.log(user);
 
-    const newUser = await createUser(user);
+    const newUser = await User(user);
 
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
