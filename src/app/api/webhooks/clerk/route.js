@@ -1,17 +1,18 @@
-import { Webhook } from 'svix';
-import { headers } from 'next/headers';
-import { WebhookEvent } from '@clerk/nextjs/server';
-const Connect = require('@/Connection/connection');
-const User =  require('@/Models/userSchema');
-const bcrypt = require('bcryptjs');
+import { clerkClient } from "@clerk/nextjs";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import { Webhook } from "svix";
+
+import { createUser } from "@/lib/actions/user.action";
 
 export async function POST(req) {
-
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
-    throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local');
+    throw new Error(
+      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
+    );
   }
 
   // Get the headers
@@ -22,8 +23,8 @@ export async function POST(req) {
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response('Error occurred -- no svix headers', {
-      status: 400
+    return new Response("Error occurred -- no svix headers", {
+      status: 400,
     });
   }
 
@@ -44,9 +45,9 @@ export async function POST(req) {
       "svix-signature": svix_signature,
     });
   } catch (err) {
-    console.error('Error verifying webhook:', err);
-    return new Response('Error occurred', {
-      status: 400
+    console.error("Error verifying webhook:", err);
+    return new Response("Error occurred", {
+      status: 400,
     });
   }
 
@@ -54,34 +55,43 @@ export async function POST(req) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-  //create a user in mongodb
-if(eventType === 'user.created'){
-    try {
-        // Connectez-vous à MongoDB
-        await Connect();
-  
-        // Hachez le mot de passe
-        const hashedPassword = await bcrypt.hash(payload.mot_de_passe, 10);
-  
-        // Créez un nouvel utilisateur
-        const newUser = new User({ nom: payload.nom, email: payload.email, mot_de_passe: hashedPassword });
-  
-        // Sauvegardez le nouvel utilisateur dans la base de données
-        await newUser.save();
-  
-        console.log('Nouvel utilisateur créé :', newUser);
-  
-        // Répondez avec les détails de l'utilisateur créé
-        return new Response(JSON.stringify(newUser), { status: 200 });
-      } catch (error) {
-        console.error('Erreur lors de la création de l\'utilisateur :', error);
-        return new Response('Erreur interne du serveur', { status: 500 });
-      }
-}
+  // CREATE User in MongoDB
+  if (eventType === "user.created") {
+    const {
+      id: clerkId,
+      email_addresses,
+      image_url,
+      first_name,
+      last_name,
+      username,
+    } = evt.data;
 
+    const user = {
+      clerkId,
+      email: email_addresses[0].email_address,
+      username: username || null,
+      firstName: first_name,
+      lastName: last_name,
+      photo: image_url,
+    };
+
+    console.log(user);
+
+    const newUser = await createUser(user);
+
+    if (newUser) {
+      await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser._id,
+        },
+      });
+    }
+
+    return NextResponse.json({ message: "New user created", user: newUser });
+  }
 
   console.log(`Webhook with an ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
+  console.log("Webhook body:", body);
 
-  return new Response('', { status: 200 });
+  return new Response("", { status: 200 });
 }
