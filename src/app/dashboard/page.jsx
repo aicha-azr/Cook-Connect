@@ -1,15 +1,14 @@
-'use client'
-import React, { useState } from 'react';
+
 import Image from "next/image";
 import logo from "../../../public/assets/logo_file_rouge.png";
-import { useRouter } from "next/navigation";
-const Postpage = () => {
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false);
+import { auth, currentUser } from "@clerk/nextjs";
+//import { useRouter } from "next/navigation";
+import Header from "../components/Header";
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+const Postpage =  () => {
+
+ // const router = useRouter()
+
   const handleClick = (id) => {
     if (typeof id === 'string') {
       router.push(`/${id}`);
@@ -17,44 +16,8 @@ const Postpage = () => {
   };
   return (
     <>
-       <div>
-      <nav className="bg-blanc border-gray-200 shadow-sm shadow-black-maron">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <Image src={logo} className="h-8 w-8" alt="Flowbite Logo" />
-            <span className="self-center text-black-maron text-2xl md:text-1xl font-semibold whitespace-nowrap dark:text-white">CookConnect</span>
-          </a>
-          <button data-collapse-toggle="navbar-user" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-black-maron rounded-lg  hover:bg-bleu-ciel focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user"  onClick={toggleMenu}>
-            <span className="sr-only">Open main menu</span>
-            <svg className="w-5 h-5 "  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-          </button>
-        </div>
-      </nav>
-      
-      {/* Menu */}
-      <div className={`absolute top-15 right-0 z-50 ${isOpen ? 'block' : 'hidden'} p-4 bg-blanc shadow-md dark:bg-gray-700 dark:divide-gray-600`} id="user-dropdown">
-        <div className="px-4 py-3">
-          <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-        </div>
-        <ul className="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Settings</a>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Earnings</a>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Sign out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+    
+      <Header />
 {/** search bar */}
       <label
         className="mx-auto mt-20 relative bg-black-maron min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
@@ -100,9 +63,7 @@ const Postpage = () => {
       </label>
       {/**  les posts*/}
       <section className="flex flex-row flex-wrap mx-auto mt-20">
-        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3" onClick={()=>{
-            handleClick('1');
-        }}>
+        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3" >
           <div className="flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-blanc rounded-lg shadow-lg hover:shadow-2xl">
           <section className="px-4 py-2 mt-2 border-b border-black-maron">
               <div className="flex items-center justify-between">
@@ -197,9 +158,7 @@ const Postpage = () => {
           </div>
         </div>
 {/**second post */}
-        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3" onClick={()=>{
-            handleClick('2');
-        }} id="2">
+        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3"  id="2">
           <div className="flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-blanc rounded-lg shadow-lg hover:shadow-2xl">
             <div className="md:flex-shrink-0">
               <img
