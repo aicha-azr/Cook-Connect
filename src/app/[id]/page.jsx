@@ -1,11 +1,22 @@
 'use client'
 import Image from "next/image";
 import logo from "../../../public/assets/logo_file_rouge.png";
-import { useState } from "react";
-const Post = ()=>{
+import React, { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
+import { AppDispatch } from '../redux/store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPost } from '../redux/slices/postSlices/PostThunk';
+const Post = ({params})=>{
     const [isOpen, setIsOpen] = useState(false);
     const [commentMenus, setCommentMenus] = useState(false)
     const [likes, setLikes] = useState(0);
+    const id = params.id
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        console.log(id);
+      dispatch(getPost(id));
+    }, [id, dispatch])
+     const {post} = useSelector((state) => state.posts); 
     const toggleMenu = () => {
       setIsOpen(!isOpen);
     };
@@ -60,30 +71,32 @@ const Post = ()=>{
       </div>
     </div>
     {/** */}
-    
+ 
+     {!Array.isArray(post) || post.length === 0 ? ( 
+        <div className='flex justify-center w-screen'>
+
+              <div class="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-jaune justify-center"></div>
+            </div>
+            ) :
+            (post.map((item) => (
+ 
 <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="max-w-3xl mx-auto">
         
         <div className="py-8">
-            <h1 className="text-3xl font-bold mb-2">Blog post title</h1>
-            <p className="text-gray-500 text-sm">Published on <time dateTime="2022-04-05" className="text-orange">April 5, 2022</time></p>
+            <h1 className="text-3xl font-bold mb-2">{item.titre}</h1>
+            <p className="text-gray-500 text-sm">Published on <time dateTime={item.date_publication.substring(0, 10)} className="text-orange">April 5, 2022</time></p>
         </div>
 
        
-        <Image src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c" width='150' height='100' alt="Featured image" className="w-full h-auto mb-8"/>
+        <Image src={item.images} width='150' height='100' alt="Featured image" className="w-full h-auto mb-8"/>
 
         <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus varius fringilla augue, vel vestibulum
-                nisl mattis vel. Praesent porttitor pharetra purus eu tincidunt.</p>
-            <p>Nullam vitae sapien non est suscipit blandit quis sit amet ipsum. Aliquam euismod accumsan nunc, in
-                convallis felis luctus in. Sed rhoncus metus a elit rutrum aliquam.</p>
-            <p>Integer ullamcorper leo nulla, nec commodo metus vehicula eget. Duis vel vestibulum tellus, eget mattis
-                quam. Nullam euismod libero sed nibh tristique, vel eleifend risus sagittis. In hac habitasse platea
-                dictumst. Sed dapibus magna at arcu euismod, a pulvinar turpis tristique. Suspendisse imperdiet velit
-                nec lectus rutrum varius.</p>
+            <p>{item.contenu}</p>
         </div>
     </div>
 </div>
+            )))}
 
  {/* Nombre de likes */}
 <div className="flex items-center justify-center border border-bleu-ciel mt-4">

@@ -6,7 +6,7 @@ Connect();
     try {
         const body = await req.json();
         const newPost = new Post({
-          utilisateur: body.utilisateur,
+          userId: body.userId,
           titre: body.titre,
           contenu: body.contenu,
           images: body.images 
@@ -25,14 +25,14 @@ Connect();
 // get all posts
  async function GET(req,res){
   try{
-    const posts = await Post.find();
+    const posts = await Post.find().populate('userId');
     if(posts.length >= 1){
       return Response.json(posts)
     }
     return Response.json({message: "no post found"}) 
   }catch(error){
     console.log('erreur: ',error);
-    return new Response.json({message: `Erreur interne du serveur: ${error}`})
+    return Response.json({message: `Erreur interne du serveur: ${error}`})
   }
  } 
 
