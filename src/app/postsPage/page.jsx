@@ -5,7 +5,7 @@ import logo from "../../../public/assets/logo_file_rouge.png";
 import { useRouter } from "next/navigation";
 import { AppDispatch } from '../redux/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllPosts } from '../redux/slices/postSlices/PostThunk';
+import { fetchAllPosts, getPost } from '../redux/slices/postSlices/PostThunk';
 const Postpage = () => {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +18,7 @@ useEffect(()=>{
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+ 
   const handleClick = (id) => {
     if (typeof id === 'string') {
       router.push(`/${id}`);
@@ -107,7 +108,7 @@ useEffect(()=>{
         </button>
       </label>
       {/**  les post*/}
-      <section className="flex flex-row flex-wrap mx-auto mt-20">
+      <section className="flex flex-row flex-wrap  mx-auto mt-20">
       {!Array.isArray(data) || data.length === 0 ? ( 
         <div className='flex justify-center w-screen'>
 
@@ -115,7 +116,7 @@ useEffect(()=>{
             </div>
             ) : (
               data.map((item) => (
-        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-15 " >
+        <div className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-50 lg:justify-center " >
           <div className="flex flex-col items-stretch min-h-full pb-4 mb-6 transition-all duration-150 bg-blanc rounded-lg shadow-lg hover:shadow-2xl">
           <section className="px-4 py-2 mt-2 border-b border-black-maron">
               <div className="flex items-center justify-between">
@@ -145,7 +146,8 @@ useEffect(()=>{
             <div className="flex flex-wrap items-center flex-1 px-4 py-1 text-center mx-auto">
               
               <h2 className="text-2xl font-bold tracking-normal text-gray-800" onClick={()=>{
-          handleClick(item._id)}}>
+          handleClick(item._id)
+          }}>
                 {item.titre}
               </h2>
             

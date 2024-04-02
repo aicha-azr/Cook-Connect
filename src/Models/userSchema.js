@@ -1,6 +1,5 @@
-//import mongoose from 'mongoose';
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+
 const userSchema = new mongoose.Schema({
   nom: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -9,4 +8,5 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
+
 module.exports = User;

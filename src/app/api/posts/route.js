@@ -15,6 +15,7 @@ Connect();
         // Save the new post to the database
         const savedPost = await newPost.save();
 
+
         // Respond with the created post
         return Response.json(savedPost);
     }catch (error) {
@@ -26,6 +27,8 @@ Connect();
  async function GET(req,res){
   try{
     const posts = await Post.find().populate('userId');
+    console.log(posts)
+
     if(posts.length >= 1){
       return Response.json(posts)
     }
