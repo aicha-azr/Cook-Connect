@@ -1,13 +1,6 @@
 import Image from "next/image";
 import logo from "../../../public/assets/logo_file_rouge.png";
-import {
-    ClerkProvider,
-    SignedIn,
-    SignedOut,
-    SignInButton,
-    UserButton,
-  } from "@clerk/nextjs";
-  import { auth, currentUser } from "@clerk/nextjs";
+
 const Header =  async()=>{
     
      
@@ -21,14 +14,7 @@ const Header =  async()=>{
             <span className="self-center text-black-maron text-2xl md:text-1xl font-semibold whitespace-nowrap dark:text-white">CookConnect</span>
           </a>
          
-          <SignedIn>
-        {/* Mount the UserButton component */}
-        <UserButton afterSignOutUrl="/" />
-      </SignedIn>
-      <SignedOut>
-        {/* Signed out users get sign in button */}
-        <SignInButton/>
-      </SignedOut>
+        
           
         </div>
       </header>

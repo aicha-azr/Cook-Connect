@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import Image from "next/image";
-import logo from '../../public/assets/logo_file_rouge.png'
+import logo from "../../public/assets/logo_file_rouge.png";
 import Aos from "aos";
 export default function Home() {
   return (
@@ -98,13 +98,13 @@ export default function Home() {
   </div>**/}
 
       <section className="py-20 bg-blanc" id="about">
-        <div class="lg:px-96 md:px-20">
-          <div class="flex pt-2 justify-center items-center text-3xl font-bold text-orange mb-8 font-HeadingFont">
+        <div className="lg:px-96 md:px-20">
+          <div className="flex pt-2 justify-center items-center text-3xl font-bold text-orange mb-8 font-HeadingFont">
             About Us
           </div>
           <br />
 
-          <p class="p-4 text-2xl text-md sm:text-left sm:text-1xl md:text-left md:text-1xl  font-sans overflow-hidden  font-BodyFont text-black-maron ">
+          <p className="p-4 text-2xl text-md sm:text-left sm:text-1xl md:text-left md:text-1xl  font-sans overflow-hidden  font-BodyFont text-black-maron ">
             We are passionate about the culinary diversity that enriches our
             lives around the globe. Our website was created with a simple yet
             powerful mission: to explore and celebrate the unique culinary

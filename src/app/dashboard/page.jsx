@@ -1,7 +1,6 @@
 
 import Image from "next/image";
 import logo from "../../../public/assets/logo_file_rouge.png";
-import { auth, currentUser } from "@clerk/nextjs";
 //import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 
@@ -21,7 +20,7 @@ const Postpage =  () => {
 {/** search bar */}
       <label
         className="mx-auto mt-20 relative bg-black-maron min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
-        for="search-bar"
+        htmlfor="search-bar"
       >
         <input
           id="search-bar"

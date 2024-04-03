@@ -76,7 +76,7 @@ const Post = ({params})=>{
      {!post? ( 
         <div className='flex justify-center w-screen'>
 
-              <div class="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-jaune justify-center"></div>
+              <div className="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-jaune justify-center"></div>
             </div>
             ) :
             (
