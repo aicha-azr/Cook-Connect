@@ -131,7 +131,7 @@ useEffect(()=>{
                       href=""
                       className="font-semibold text-gray-700 hover:underline"
                     >
-                      {item.userId.nom}
+                      {item.user.nom}
                     </a>
                     <span className="mx-1 text-xs text-gray-600">
                       {item.date_publication.substring(0, 10)}

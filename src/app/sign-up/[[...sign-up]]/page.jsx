@@ -3,7 +3,6 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import logo from '../../../../public/assets/logo_file_rouge.png'
-import { SignUp } from "@clerk/nextjs";
  
 export default function Page() {
   return (<>
@@ -55,12 +54,12 @@ export default function Page() {
         </div>
       </header>
   <div className='flex justify-center mt-5'>
-  <SignUp className=" flex items-center justify-center"/>
   </div>
   </>);
 }
 
 /**
+<SignUp className=" flex items-center justify-center"/>
  const Signup = ()=>{
      return(
          <section class="flex flex-col items-center pt-6">

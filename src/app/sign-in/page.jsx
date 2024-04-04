@@ -1,4 +1,3 @@
-import { SignIn } from "@clerk/nextjs";
 import Image from "next/image";
 import logo from '../../../public/assets/logo_file_rouge.png' 
 export default function Page() {
@@ -51,11 +50,11 @@ export default function Page() {
         </div>
       </header>
   <div className="mt-5 flex justify-center">
-    <SignIn />
     </div>
     </>);
 }
 /*const Login =()=>{
+<SignIn />
     return(<>
 <div
     class="relative mx-auto mt-20 w-full max-w-md bg-bleu-ciel px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
