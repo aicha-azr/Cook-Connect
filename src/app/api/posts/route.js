@@ -1,6 +1,6 @@
-import Connect from '@/Connection/connection';
-import Post from '@/Models/postSchema';
-import User from '@/Models/userSchema';
+import Connect from '../../../Connection/connection';
+import Post from '../../../Models/postSchema';
+import User from '../../../Models/userSchema';
 // add a post
   async function POST(req, res) {
     await Connect();
@@ -10,7 +10,7 @@ import User from '@/Models/userSchema';
           user: body.user,
           titre: body.titre,
           contenu: body.contenu,
-          images: body.images 
+          images: body.images  
         });
 
         // Save the new post to the database

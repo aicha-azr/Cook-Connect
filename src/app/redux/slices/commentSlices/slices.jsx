@@ -1,5 +1,6 @@
 const { createSlice } = require('@reduxjs/toolkit');
-const { fetchAllComments, addComment, editComment, getComment, deleteComment } = require('@/app/redux/slices/postSlices/PostThunk');
+const { fetchAllComment, addComment, editComment, getComment, deleteComment } = require('./CommentThunk');
+
 
 const initialState = {
   data: [],
@@ -16,15 +17,15 @@ const commentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllComments.pending, (state) => {
+      .addCase(fetchAllComment.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAllComments.fulfilled, (state, action) => {
+      .addCase(fetchAllComment.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchAllComments.rejected, (state, action) => {
+      .addCase(fetchAllComment.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

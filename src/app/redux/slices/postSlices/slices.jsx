@@ -1,5 +1,5 @@
 const { createSlice } = require('@reduxjs/toolkit');
-const { fetchAllPosts, addPost, editPost, getPost, deletePost } = require('@/app/redux/slices/postSlices/PostThunk');
+const { fetchAllPosts, addPost, editPost, getPost, deletePost } = require('./PostThunk');
 
 const initialState = {
   data: [],

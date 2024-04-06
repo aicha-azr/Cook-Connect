@@ -1,5 +1,5 @@
-import Connect from '@/Connection/connection';
-import Post from '@/Models/postSchema';
+import Connect from '../../../../Connection/connection';
+import Post from '../../../../Models/postSchema';
 import { NextResponse } from 'next/server';
 Connect();
 
