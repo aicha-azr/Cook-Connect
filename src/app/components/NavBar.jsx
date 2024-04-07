@@ -1,16 +1,17 @@
 import brand from '../../../public/assets/cookconnect.png'
+import logo from '../../../public/assets/logo_file_rouge.png';
 import Image from "next/image";
 const NavBar = ()=>{
     return(
         <>
         
 
-<div className="flex flex-wrap w-full shadow-buttom shadow-sm">
-  <div className="px-3 w-full bg-white ">
+<div className="flex flex-wrap w-full ">
+  <div className="px-3 w-full bg-white shadow-bottom shadow-sm shadow-black-maron">
       <div className="sm:flex items-stretch justify-between grow lg:mb-0  py-5 px-5">
     <div className="flex flex-col flex-wrap justify-center mb-5 mr-3 lg:mb-0">
     <span className="my-0 flex text-dark font-semibold text-[1.35rem]/[1.2] flex-col justify-center">
-       <Image src={brand} className='h-8 w-8'/>
+       <Image src={logo} className='h-10 w-10'/>
     </span>
     </div>
     <div className="flex items-center lg:shrink-0 lg:flex-nowrap">

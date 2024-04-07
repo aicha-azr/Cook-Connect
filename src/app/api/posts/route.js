@@ -1,16 +1,35 @@
 import Connect from '../../../Connection/connection';
 import Post from '../../../Models/postSchema';
 import User from '../../../Models/userSchema';
+import formidable from 'formidable';
+import fs from 'fs';
+import path from 'path';
 // add a post
   async function POST(req, res) {
     await Connect();
     try {
+      const form = new formidable.IncomingForm();
+      form.uploadDir = path.join(process.cwd(), 'public/uploads');
+      form.keepExtensions = true;
+  
+      form.parse(req, async (err, fields, files) => {
+        if (err) {
+          console.error('Erreur lors du téléchargement de l\'image :', err);
+          return res.status(500).json({ message: 'Erreur lors du téléchargement de l\'image' });
+        }
+  
+        // Extract the image file
+        const image = files.file;
+  
+        // Save the image file to a location (you can customize this part based on your requirements)
+        const imagePath = image.path;
+
         const body = await req.json();
         const newPost = new Post({
           user: body.user,
           titre: body.titre,
           contenu: body.contenu,
-          images: body.images  
+          images: imagePath  
         });
 
         // Save the new post to the database
@@ -19,6 +38,7 @@ import User from '../../../Models/userSchema';
 
         // Respond with the created post
         return Response.json(savedPost);
+      });
     }catch (error) {
         console.error('Erreur lors de la création du post :', error);
         return Response.json({ message: 'Erreur interne du serveur' }, { status: HttpStatusCode.NotFound });
