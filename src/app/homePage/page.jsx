@@ -7,7 +7,9 @@ import { AppDispatch } from '../redux/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPosts, getPost } from '../redux/slices/postSlices/PostThunk';
 import NavBar from '../components/NavBar';
+import requireAuth from '../requireAuth';
 const Postpage = () => {
+  requireAuth();
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();

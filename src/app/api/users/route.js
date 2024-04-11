@@ -1,5 +1,5 @@
-import Connect from "@/Connection/connection";
-import User from "@/Models/userSchema";
+import Connect from "../../../Connection/connection";
+import User from "../../../Models/userSchema";
 import bcrypt from 'bcryptjs';
 
 // Assuming you have already created an Express app and it's listening on a port
@@ -42,5 +42,37 @@ async function POST(req, res) {
     return Response.json({ message: 'Erreur interne du serveur' });
   }
 }
+ /*async function POST(req) {
+  try {
+    const body = await req.json();
+    const userData = body.formData;
 
+    //Confirm data exists
+    if (!userData?.email || !userData.mot_de_passe) {
+      return NextResponse.json(
+        { message: "All fields are required." },
+        { status: 400 }
+      );
+    }
+
+    // check for duplicate emails
+    const duplicate = await User.findOne({ email: userData.email })
+      .lean()
+      .exec();
+
+    if (duplicate) {
+      return NextResponse.json({ message: "Duplicate Email" }, { status: 409 });
+    }
+
+    const hashPassword = await bcrypt.hash(userData.mot_de_passe, 10);
+    userData.mot_de_passe = hashPassword;
+
+    await User.create(userData);
+    return NextResponse.json({ message: "User Created." }, { status: 201 });
+  } catch (error) {
+    console.log(err);
+    console.log(error)
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
+  }
+}*/
 export { GET, POST };

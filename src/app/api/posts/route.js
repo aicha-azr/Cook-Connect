@@ -4,9 +4,11 @@ import User from '../../../Models/userSchema';
 import formidable from 'formidable';
 import fs from 'fs';
 import path from 'path';
+import middleware from '../middleware';
 // add a post
   async function POST(req, res) {
     await Connect();
+   
     try {
       const form = new formidable.IncomingForm();
       form.uploadDir = path.join(process.cwd(), 'public/uploads');
@@ -51,7 +53,7 @@ import path from 'path';
     try {
       const posts = await Post.find().populate('user'); // Correct the field name to 'user'
       console.log("postssss");
-      
+      console.log(posts);
       if (posts.length >= 1) {
         return Response.json(posts);
       }
@@ -63,4 +65,4 @@ import path from 'path';
   }
 
 
-module.exports = { POST, GET };
+  exports.module = {POST, GET}

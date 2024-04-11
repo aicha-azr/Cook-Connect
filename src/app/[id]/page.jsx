@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 import { AppDispatch } from '../redux/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from '../redux/slices/postSlices/PostThunk';
+import requireAuth from "../requireAuth";
 const Post = ({params})=>{
+    requireAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [commentMenus, setCommentMenus] = useState(false)
     const [likes, setLikes] = useState(0);

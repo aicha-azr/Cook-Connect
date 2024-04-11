@@ -5,7 +5,9 @@ import { useState } from "react";
 import Image from 'next/image';
 import { addPost } from "../redux/slices/postSlices/PostThunk";
 import { useDispatch} from 'react-redux';
+import requireAuth from "../requireAuth";
 const AddPost = () => {
+    requireAuth();
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         title: '',

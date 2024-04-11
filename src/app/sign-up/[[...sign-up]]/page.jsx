@@ -1,9 +1,9 @@
 "use client"
-import { ClerkProvider } from '@clerk/nextjs';
-import { UserButton } from "@clerk/nextjs";
+
 import Image from "next/image";
 import logo from '../../../../public/assets/logo_file_rouge.png'
- 
+import SignUpForm from '../../components/SignUpForm' 
+import brand from '../../../../public/assets/2.png'
 export default function Page() {
   return (<>
    <header className=" inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-blanc py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
@@ -53,7 +53,17 @@ export default function Page() {
           </div>
         </div>
       </header>
-  <div className='flex justify-center mt-5'>
+  <div className='flex justify-center mt-10 lg:mt-20 pt-2'>
+  <main className="flex items-center justify-center md:h-screen ">
+      <div className=" flex items-center w-full max-w-[400px] flex-col  p-4 md:-mt-32">
+       
+          <div className="w-32 text-white flex  justify-center md:w-36">
+           <Image src={logo} width={400} height={400}/>
+          </div>
+        
+        <SignUpForm/>
+      </div>
+    </main>
   </div>
   </>);
 }
