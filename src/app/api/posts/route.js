@@ -1,31 +1,18 @@
 import Connect from '../../../Connection/connection';
 import Post from '../../../Models/postSchema';
 import User from '../../../Models/userSchema';
-const cloudinary = require('cloudinary').v2;
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
-});
+const mongoose = require('mongoose');
 async function POST(req, res) {
   await Connect();
   
   try {
-      const { user, titre, contenu} = req.body; 
-      let uploadedImages = [];
-
-      if (req.files) {
-          uploadedImages = await Promise.all(req.files.map(async (image) => {
-              const cloudinaryUpload = await cloudinary.uploader.upload(image.path);
-              return cloudinaryUpload.secure_url;
-          }));
-      }
-
+    const body = await req.json();
+    //const { user, titre, contenu, images } = req.body;
     const newPost = new Post({
-        user,
-        titre,
-        contenu,
-        images: uploadedImages
+      user: body.user,
+      titre: body.titre,
+      contenu: body.contenu,
+      images: body.images 
     });
      
       // Save the new post to the database
@@ -35,7 +22,7 @@ async function POST(req, res) {
       return Response.json(savedPost);
   } catch (error) {
       console.error('Erreur lors de la création du post :', error);
-      return Response.json({ message: 'Erreur interne du serveur' }, { status: HttpStatusCode.NotFound });
+      return Response.json({ message: 'Erreur interne du serveur' }, { status: 500 });
   }
 }
 

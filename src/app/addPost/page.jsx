@@ -6,60 +6,26 @@ import Image from 'next/image';
 import { addPost } from "../redux/slices/postSlices/PostThunk";
 import { useDispatch} from 'react-redux';
 import requireAuth from "../requireAuth";
-import jwt from 'jsonwebtoken';
+import getUserIdFromCookie from '../getUserIdFromCookie';
+import axios from 'axios';
 const AddPost = () => {
     requireAuth();
     const dispatch = useDispatch();
+    const userId = getUserIdFromCookie();
     const [form, setForm] = useState({
-        title: '',
+        user: userId,
+        titre: '',
         contenu: '',
         images: []
     });
-    function getCookie(name) {
-        if (typeof document === 'undefined') {
-            return null; // Return null if running in a non-browser environment
-        }
-        const cookieString = document.cookie;
-        const cookies = cookieString.split('; ');
-        for (const cookie of cookies) {
-            const [cookieName, cookieValue] = cookie.split('=');
-            if (cookieName === name) {
-                return decodeURIComponent(cookieValue);
-            }
-        }
-        return null;
-    }
-    
-    // Function to get the user ID from the token stored in the cookie
-    function getUserIdFromCookie() {
-        // Retrieve the token from the cookie
-        const token = getCookie('token');
-        
-        if (!token) {
-            // If token is not found, return null or handle the error accordingly
-            return null;
-        }
-    
-        try {
-            // Decode the token to extract user information
-            const decodedToken = jwt.decode(token);
-            
-            // Extract and return the user ID from the decoded token
-            return decodedToken.id;
-        } catch (error) {
-            // Handle decoding errors, such as invalid token format
-            console.error('Error decoding token:', error);
-            return null;
-        }
-    }
-    const userId = getUserIdFromCookie();
+   
     const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        /*const files = Array.from(e.target.files).map(file => ({
+       
+        const files = Array.from(e.target.files).map(file => ({
             url: URL.createObjectURL(file),
             name: file.name,
             size: file.size,
-        }));*/
+        }));
         setForm(prevForm => ({ ...prevForm, images: [...prevForm.images, ...files] }));
     };
     const handleRemoveImage = (indexToRemove) => {
@@ -68,50 +34,58 @@ const AddPost = () => {
             images: prevForm.images.filter((_, index) => index !== indexToRemove)
         }));
     };
-   
-    const formData = new FormData();
-    formData.append('user', userId);
-    formData.append('titre', form.title);
-    formData.append('contenu', form.contenu);
-    form.images.forEach((image, index) =>{
-        formData.append(`image${index}`, image);
-    });
+    const uploadImages = async (e) => {
+       // setIsLoading(true);   
+         try {
+            const formData = new FormData();
+            formData.append("file", e.target.files.item(0));
+            formData.append("upload_preset", "ml_default");
+            await axios.post("https://api.cloudinary.com/v1_1/ds1dvhn4a/image/upload", formData)
+                .then(res => {
+                    const imageUrl = res.data.secure_url;
+                    setForm(prevForm => ({ ...prevForm, images: [...prevForm.images, imageUrl] }));
+                });
+            //setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+            //setIsLoading(false);
+        }
+    };
+  
 
 
     const addOnePost =()=>{
         console.log(userId);
-        dispatch(addPost(formData));
-    
+        dispatch(addPost(form));
+        setForm({...form,
+        titre: '',
+        contenu: '',
+        images: []})
     }
     return (
         <>
             <NavBar />
-            <div className="bg-white shadow p-4 py-8">
-                <div className="heading text-center font-bold text-2xl m-5 text-gray-800 bg-white">New Post</div>
-                <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-                    <input className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-                    <textarea className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Describe everything about this post here" value={form.contenu} onChange={(e) => setForm({ ...form, contenu: e.target.value })}></textarea>
+            <div className="bg-blanc mt-20 shadow p-4 py-8">
+                <div className="heading text-center font-bold text-2xl m-5 text-black-maron font-BodyFon">New Post</div>
+                <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-bleu-ciel p-4 shadow-lg max-w-2xl">
+                    <input className="title bg-bleu-ciel border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" value={form.titre} onChange={(e) => setForm({ ...form, titre: e.target.value })} />
+                    <textarea className="description bg-bleu-ciel sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Describe everything about this post here" value={form.contenu} onChange={(e) => setForm({ ...form, contenu: e.target.value })}></textarea>
 
-                    <div className="icons flex text-gray-500 m-2">
-                        <label id="select-image">
-                            <svg className="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                            </svg>
-                            <input hidden type="file" multiple onChange={handleFileChange} />
-                        </label>
-                        <div className="count ml-auto text-gray-400 text-xs font-semibold">0/300</div>
-                    </div>
 
                     <div id="preview" className="my-4 flex flex-wrap">
-                        {form.images.map((image, index) => (
+                    <div className="w-full">
+                                <label htmlFor="image" className="block mb-2 text-sm font-medium text-black-maron  capitalize">image</label>
+                                <input type="file" id="image" className="bg-blanc border border-black-maron text-black-maron text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  outline-none" placeholder="image" onChange={(e) => uploadImages(e)} multiple={false} />
+                            </div>
+                        {/*form.images.map((image, index) => (
                              <div key={index} className="relative w-32 h-32 object-cover rounded mr-2">
-                            <Image key={index} src={image.url} alt={image.name} width={32} height={32} className="object-cover rounded mr-2 w-32 h-32" />
+                            <Image key={index} src={image.url} alt="image" width={32} height={32} className="object-cover rounded mr-2 w-32 h-32" onChange={(e) => uploadImages(e)} />
 
                             <button onClick={() => handleRemoveImage(index)} className="absolute top-0 right-0 m-2 text-black-maron text-md  hover:bg-red-700 rounded-full p-1">
                 <span>×</span>
             </button>
             </div>
-                        ))}
+                        ))*/}
                     </div>
 
                     <div className="buttons flex justify-end">

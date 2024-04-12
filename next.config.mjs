@@ -2,7 +2,7 @@
 const nextConfig = {
     
         images: {
-          domains: ['images.unsplash.com','th.bing.com','*','ik.imagekit.io'],
+          domains: ['images.unsplash.com','th.bing.com','*','res.cloudinary.com'],
         },
        
 };

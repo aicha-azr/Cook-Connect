@@ -7,6 +7,7 @@ import { AppDispatch } from '../redux/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from '../redux/slices/postSlices/PostThunk';
 import requireAuth from "../requireAuth";
+import NavBar from "../components/NavBar";
 const Post = ({params})=>{
     requireAuth();
     const [isOpen, setIsOpen] = useState(false);
@@ -32,48 +33,14 @@ const Post = ({params})=>{
     const handleLike = () => {
         setLikes(likes + 1);
     };
-
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-EN', options);
+      };
     return(
         <>
-         <div>
-      <nav className="bg-blanc border-gray-200 shadow-sm shadow-black-maron">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <Image src={logo} className="h-8 w-8" alt="Flowbite Logo" />
-            <span className="self-center text-black-maron text-2xl md:text-1xl font-semibold whitespace-nowrap dark:text-white">CookConnect</span>
-          </a>
-          <button data-collapse-toggle="navbar-user" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-black-maron rounded-lg  hover:bg-bleu-ciel focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user"  onClick={toggleMenu}>
-            <span className="sr-only">Open main menu</span>
-            <svg className="w-5 h-5 "  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-          </button>
-        </div>
-      </nav>
-      
-      {/* Menu */}
-      <div className={`absolute top-15 right-0 z-50 ${isOpen ? 'block' : 'hidden'} p-4 bg-blanc shadow-md dark:bg-gray-700 dark:divide-gray-600`} id="user-dropdown">
-        <div className="px-4 py-3">
-          <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-        </div>
-        <ul className="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Settings</a>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Earnings</a>
-          </li>
-          <li>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white border-t border-black-maron">Sign out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    {/** */}
+     <NavBar />
  
      {!post? ( 
         <div className='flex justify-center w-screen'>
@@ -83,16 +50,16 @@ const Post = ({params})=>{
             ) :
             (
  
-<div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div className=" max-w-7xl mx-auto px-4 sm:px-6 mt-20 lg:px-8">
     <div className="max-w-3xl mx-auto">
         
         <div className="py-8">
             <h1 className="text-3xl font-bold mb-2">{post.titre}</h1>
-            <p className="text-gray-500 text-sm">Published on {post.date_publication}</p>
+            <p className="text-gray-500 text-sm">Published on {formatDate(post.date_publication)}</p>
         </div>
 
         {post.images && post.images.map((image, index) => (
-    <Image key={index} src={image} width='150' height='100' alt={`Featured image ${index}`} className="w-full h-auto mb-8"/>
+    <Image key={index} src={image}  layout="responsive" width={150} height={100} alt={`Featured image ${index}`} className="w-full h-auto mb-8"/>
 ))}
 
 
@@ -124,7 +91,6 @@ const Post = ({params})=>{
     </div>             
             </div>
 
-            {/* Votre code restant */}
   {/** */}          
 <section className="bg-blanc py-8 lg:py-16 antialiased">
   <div className="max-w-2xl mx-auto px-4">
