@@ -3,8 +3,11 @@ import brand from '../../../public/assets/cookconnect.png'
 import logo from '../../../public/assets/logo_file_rouge.png';
 import Image from "next/image";
 import {useState} from 'react';
+import getUserIdFromCookie from '../getUserIdFromCookie';
+
 const NavBar = ()=>{
     const [isOpen, setIsOpen] = useState(false);
+    const userId = getUserIdFromCookie();
     return(
         <>
         

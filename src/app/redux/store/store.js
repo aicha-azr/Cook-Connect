@@ -2,11 +2,12 @@ import { commentsReducer } from '../slices/commentSlices/slices';
 const { configureStore, createSlice } = require('@reduxjs/toolkit');
 const { useDispatch } = require('react-redux');
 const { postsReducer } = require('../slices/postSlices/slices');
-
+const {usersReducer} = require('../slices/userSlices/slices')
 const store = configureStore({
     reducer: {
         posts: postsReducer,
         comments: commentsReducer,
+        users: usersReducer,
     }
 });
 
