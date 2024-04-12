@@ -1,5 +1,8 @@
 // Function to get the value of a cookie by name
 function getCookie(name) {
+    if (typeof document === 'undefined') {
+        return null; // Return null if running in a non-browser environment
+    }
     const cookieString = document.cookie;
     const cookies = cookieString.split('; ');
     for (const cookie of cookies) {
@@ -19,6 +22,9 @@ function isAuthenticated() {
 
 // Function to redirect the user to the landing page
 function redirectToLandingPage() {
+    if (typeof window === 'undefined') {
+        return; // Do nothing if running in a non-browser environment
+    }
     window.location.href = '/'; // Adjust the URL as needed
 }
 
