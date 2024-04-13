@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <section className="bg-blanc py-20">
+      <section className="bg-blanc">
         <div className="container mx-auto px-4 mt-20">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-1/2 mb-8 md:mb-0 text-orange">
@@ -30,7 +30,7 @@ export default function Home() {
             <div className="md:w-1/2">
               <Image
                 src={cookImage}
-                alt="Coffee beans"
+                alt="..."
                 className="w-full  "
               />
             </div>
