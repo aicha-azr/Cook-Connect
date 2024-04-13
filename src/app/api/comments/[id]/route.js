@@ -1,5 +1,5 @@
-import Connect from '@/Connection/connection';
-import Comment from '@/Models/commentSchema';
+import Connect from '../../../../Connection/connection';
+import Comment from '../../../../Models/commentSchema';
 import { NextResponse } from 'next/server';
 Connect();
 

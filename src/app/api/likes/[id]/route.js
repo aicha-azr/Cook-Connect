@@ -1,5 +1,5 @@
-import Connect from '@/Connection/connection';
-import Like from '@/Models/likeSchema';
+import Connect from '../../../../Connection/connection';
+import Like from '../../../..//Models/likeSchema';
 import { NextResponse } from 'next/server';
 Connect();
 
