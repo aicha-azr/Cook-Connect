@@ -18,7 +18,7 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
   const handleLogin= async(e)=>{
-   // e.preventDefault();
+   e.preventDefault();
    try{const result = await axios.post('http://localhost:3000/api/login', {email, mot_de_passe});
     console.log(result.data)
     const { token } = result.data; // Assuming the token is returned in the response
@@ -53,7 +53,9 @@ function isAuthenticated() {
 
 // Function to redirect the user to the home page
 function redirectToHomePage() {
+
   window.location.href = '/homePage'; // Adjust the URL as needed
+  //window.location.reload();
 }
 
 // Check if the user is authenticated when the page loads

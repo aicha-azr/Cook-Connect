@@ -75,8 +75,8 @@ const usersSlice = createSlice({
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.loading = false;
-        const deletedPost = action.payload;
-        const index = state.data.findIndex((post) => post._id === deletedPost._id);
+        const deletedUser = action.payload;
+        const index = state.data.findIndex((user) => user._id === deletedUser._id);
         if (index !== -1) {
           state.data.splice(index, 1); 
         }

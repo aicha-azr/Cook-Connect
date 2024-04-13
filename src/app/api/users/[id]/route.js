@@ -1,8 +1,9 @@
 const { NextResponse } = require('next/server');
 const { HttpStatusCode } = require('next/server');
-const Connect = require('@/Connection/connection');
-const User = require('@/Models/userSchema');
+const User = require('../../../../Models/userSchema');
 const bcrypt = require('bcryptjs');
+const { default: Connect } = require('../../../../Connection/connection');
+ Connect();
 
 // update a user
 async function PUT(req, { params }) {
@@ -29,15 +30,15 @@ async function PUT(req, { params }) {
 
 // get one user
 async function GET(req, { params }) {
+
     try {
-        await Connect();
         const user = await User.findById(params.id);
         if (user) {
             return NextResponse.json({ user });
         }
-        return NextResponse.json({ message: `Utilisateur ${params.id} non trouvé` }, { status: HttpStatusCode.NotFound });
+        return NextResponse.json({ message: `Utilisateur ${params.id} non trouvé` }, { status: 404 });
     } catch (error) {
-        return NextResponse.json({ message: error.message }, { status: HttpStatusCode.BadRequest });
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 // delete a user
