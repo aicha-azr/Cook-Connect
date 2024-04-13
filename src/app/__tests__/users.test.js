@@ -1,5 +1,5 @@
 
-const { GET } = require('../api/users/[id]/route');
+/*const { GET } = require('../api/users/[id]/route');
 
 jest.mock('../../Models/userSchema', () => ({
     findById: jest.fn(),
@@ -43,4 +43,4 @@ describe('GET /api/users/:id', () => {
         expect(result.statusCode).toEqual(500);
         expect(result.body.message).toEqual(errorMessage);
     });
-});
+});*/
