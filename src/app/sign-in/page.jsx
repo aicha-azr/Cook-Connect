@@ -76,25 +76,9 @@ window.onload = function() {
               </a>
             </div>
             <div className="hidden md:flex md:items-center md:justify-center md:gap-5">
-              <a
-                aria-current="page"
-                className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                href="/"
-              >
-                Home
-              </a>
-              <a
-                className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                href="#about"
-              >
-                About
-              </a>
-              <a
-                className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                href="#contact"
-              >
-                Contact
-              </a>
+              
+              
+             
             </div>
             <div className="flex items-center justify-end gap-3">
               <a
