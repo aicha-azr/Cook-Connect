@@ -58,7 +58,9 @@ function redirectToHomePage() {
 }
   window.location.href = '/homePage'; 
 }
-
+if (typeof window === 'undefined') {
+  return; // Do nothing if running in a non-browser environment
+}
 // Check if the user is authenticated when the page loads
 window.onload = function() {
   if (isAuthenticated()) {
