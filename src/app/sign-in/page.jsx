@@ -4,8 +4,9 @@ import logo from '../../../public/assets/logo_file_rouge.png'
 import {useState} from 'react';
 import axios from "axios";
 import { setCookie } from 'cookie';
-
+import redirectToHomePag from '../redirectToHomePage';
 export default function Page() {
+  redirectToHomePage();
 const [email, setEmail] = useState('');
 const [mot_de_passe, setMot_de_passe] = useState('');
 function setCookie(name, value, days) {
@@ -32,44 +33,11 @@ function setCookie(name, value, days) {
 
 
 
-  // Function to get the value of a cookie by name
-function getCookie(name) {
-  const cookieString = document.cookie;
-  const cookies = cookieString.split('; ');
-  for (const cookie of cookies) {
-      const [cookieName, cookieValue] = cookie.split('=');
-      if (cookieName === name) {
-          return cookieValue;
-      }
-  }
-  return null;
-}
 
 
-function isAuthenticated() {
-  const token = getCookie('token');
-  return token !== null && token !== undefined;
-}
-
-
-function redirectToHomePage() {
-  if (typeof window === 'undefined') {
-    return; // Do nothing if running in a non-browser environment
-}
-  window.location.href = '/homePage'; 
-}
-if (typeof window === 'undefined') {
-  return; // Do nothing if running in a non-browser environment
-}
-// Check if the user is authenticated when the page loads
-window.onload = function() {
-  if (isAuthenticated()) {
-      redirectToHomePage();
-  }
-};
 
   return (<>
-    <header className=" inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-blanc py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
+    <div className=" inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-blanc py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
         <div className="px-4">
           <div className="flex items-center justify-between">
             <div className="flex shrink-0">
@@ -99,7 +67,7 @@ window.onload = function() {
             </div>
           </div>
         </div>
-      </header>
+      </div>
 
 
 
