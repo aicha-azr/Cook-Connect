@@ -21,8 +21,8 @@ function setCookie(name, value, days) {
    e.preventDefault();
    try{const result = await axios.post('http://localhost:3000/api/login', {email, mot_de_passe});
     console.log(result.data)
-    const { token } = result.data; // Assuming the token is returned in the response
-    setCookie('token', token, 1); // Token expires in 1 day
+    const { token } = result.data; 
+    setCookie('token', token, 1); 
     console.log('Login successful. Token stored in cookie.');
   } catch(e){
       console.log('error: ', e)
@@ -45,17 +45,18 @@ function getCookie(name) {
   return null;
 }
 
-// Function to check if the user is authenticated (has a token)
+
 function isAuthenticated() {
   const token = getCookie('token');
   return token !== null && token !== undefined;
 }
 
-// Function to redirect the user to the home page
-function redirectToHomePage() {
 
-  window.location.href = '/homePage'; // Adjust the URL as needed
-  //window.location.reload();
+function redirectToHomePage() {
+  if (typeof window === 'undefined') {
+    return; // Do nothing if running in a non-browser environment
+}
+  window.location.href = '/homePage'; 
 }
 
 // Check if the user is authenticated when the page loads
