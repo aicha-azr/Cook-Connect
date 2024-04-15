@@ -4,7 +4,7 @@ import logo from '../../../public/assets/logo_file_rouge.png'
 import {useState} from 'react';
 import axios from "axios";
 import { setCookie } from 'cookie';
-import redirectToHomePag from '../redirectToHomePage';
+import redirectToHomePage from '../redirectToHomePage';
 export default function Page() {
   redirectToHomePage();
 const [email, setEmail] = useState('');
