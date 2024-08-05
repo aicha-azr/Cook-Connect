@@ -27,9 +27,9 @@ const NavBar = ()=>{
   <div className="px-3 w-full bg-blanc shadow-bottom shadow-sm shadow-black-maron">
       <div className="sm:flex items-stretch justify-between grow lg:mb-0  py-5 px-5">
     <div className="flex flex-col flex-wrap justify-center mb-5 mr-3 lg:mb-0">
-    <span className="my-0 flex text-dark font-semibold text-[1.35rem]/[1.2] flex-col justify-center">
+    <a href='/homePage' className="my-0 flex text-dark font-semibold text-[1.35rem]/[1.2] flex-col justify-center">
        <Image src={logo} className='h-10 w-10'/>
-    </span>
+    </a>
     </div>
     <div className="flex items-center lg:shrink-0 lg:flex-nowrap">
     <div className="relative flex items-center lg:ml-4 sm:mr-0 mr-2">

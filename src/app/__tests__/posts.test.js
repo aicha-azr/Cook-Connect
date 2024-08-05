@@ -1,11 +1,11 @@
 // __tests__/api.test.js
 
+const { POST, GET } = require('../api/posts/route');
 jest.mock('../api/posts/route', () => ({
     POST: jest.fn(),
     GET: jest.fn(),
   }));
   
-  const { POST, GET } = require('../api/posts/route');
   
   describe('POST /api/posts', () => {
     it('should create a new post', async () => {

@@ -7,7 +7,7 @@ async function POST(req, res) {
   
   try {
     const body = await req.json();
-    //const { user, titre, contenu, images } = req.body;
+   
     const newPost = new Post({
       user: body.user,
       titre: body.titre,
@@ -15,10 +15,10 @@ async function POST(req, res) {
       images: body.images 
     });
      
-      // Save the new post to the database
+     
       const savedPost = await newPost.save();
 
-      // Respond with the created post
+    
       return Response.json(savedPost);
   } catch (error) {
       console.error('Erreur lors de la création du post :', error);
@@ -32,7 +32,7 @@ async function GET(req, res) {
     await Connect();
 
     try {
-        const posts = await Post.find().populate('user'); // Correct the field name to 'user'
+        const posts = await Post.find().populate('user'); 
         console.log("postssss");
         console.log(posts);
         if (posts.length >= 1) {

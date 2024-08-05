@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 const UserForm = () => {
   const router = useRouter();
- // const [formData, setFormData] = useState({});
+ 
   const [nom, setNom]= useState('');
   const [email, setEmail] = useState('');
   const [mot_de_passe, setMot_de_passe]= useState('');
@@ -24,11 +24,10 @@ const UserForm = () => {
         const response = await res1.json(); 
         setErrorMessage(response.message);
       } else {
-        router.push("/sign-in"); // Removed router.refresh()
+        router.push("/sign-in"); 
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      // Handle error, show error message, etc.
     }
   };
   

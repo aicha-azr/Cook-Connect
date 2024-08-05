@@ -19,21 +19,7 @@ const AddPost = () => {
         images: []
     });
    
-    const handleFileChange = (e) => {
-       
-        const files = Array.from(e.target.files).map(file => ({
-            url: URL.createObjectURL(file),
-            name: file.name,
-            size: file.size,
-        }));
-        setForm(prevForm => ({ ...prevForm, images: [...prevForm.images, ...files] }));
-    };
-    const handleRemoveImage = (indexToRemove) => {
-        setForm(prevForm => ({
-            ...prevForm,
-            images: prevForm.images.filter((_, index) => index !== indexToRemove)
-        }));
-    };
+   
     const uploadImages = async (e) => {
        // setIsLoading(true);   
          try {
@@ -77,15 +63,7 @@ const AddPost = () => {
                                 <label htmlFor="image" className="block mb-2 text-sm font-medium text-black-maron  capitalize">image</label>
                                 <input type="file" id="image" className="bg-blanc border border-black-maron text-black-maron text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  outline-none" placeholder="image" onChange={(e) => uploadImages(e)} multiple={false} />
                             </div>
-                        {/*form.images.map((image, index) => (
-                             <div key={index} className="relative w-32 h-32 object-cover rounded mr-2">
-                            <Image key={index} src={image.url} alt="image" width={32} height={32} className="object-cover rounded mr-2 w-32 h-32" onChange={(e) => uploadImages(e)} />
-
-                            <button onClick={() => handleRemoveImage(index)} className="absolute top-0 right-0 m-2 text-black-maron text-md  hover:bg-red-700 rounded-full p-1">
-                <span>×</span>
-            </button>
-            </div>
-                        ))*/}
+              
                     </div>
 
                     <div className="buttons flex justify-end">

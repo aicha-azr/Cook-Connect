@@ -1,7 +1,7 @@
 // Function to get the value of a cookie by name
 function getCookie(name) {
     if (typeof document === 'undefined') {
-        return null; // Return null if running in a non-browser environment
+        return null; 
     }
     const cookieString = document.cookie;
     const cookies = cookieString.split('; ');
@@ -23,17 +23,17 @@ function isAuthenticated() {
 // Function to redirect the user to the landing page
 function redirectToLandingPage() {
     if (typeof window === 'undefined') {
-        return; // Do nothing if running in a non-browser environment
+        return;
     }
-    window.location.href = '/'; // Adjust the URL as needed
+    window.location.href = '/'; 
 }
 
-// Higher-order function to enforce authentication on pages
+
 function requireAuth() {
     if (!isAuthenticated()) {
         redirectToLandingPage();
     }
 }
 
-// Call requireAuth() on each page where authentication is required
+
 export default requireAuth;

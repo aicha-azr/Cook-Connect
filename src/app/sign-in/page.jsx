@@ -25,6 +25,7 @@ function setCookie(name, value, days) {
     const { token } = result.data; 
     setCookie('token', token, 1); 
     console.log('Login successful. Token stored in cookie.');
+    alert('Login successful.');
   } catch(e){
       console.log('error: ', e)
     }
