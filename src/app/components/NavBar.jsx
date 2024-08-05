@@ -25,7 +25,7 @@ const NavBar = ()=>{
 
 <div className="fixed top-0 flex flex-wrap w-full ">
   <div className="px-3 w-full bg-blanc shadow-bottom shadow-sm shadow-black-maron">
-      <div className="sm:flex items-stretch justify-between grow lg:mb-0  py-5 px-5">
+      <div className="sm:flex items-stretch justify-between grow lg:mb-0  py-1 px-5">
     <div className="flex flex-col flex-wrap justify-center mb-5 mr-3 lg:mb-0">
     <a href='/homePage' className="my-0 flex text-dark font-semibold text-[1.35rem]/[1.2] flex-col justify-center">
        <Image src={logo} className='h-10 w-10'/>
@@ -70,10 +70,15 @@ const NavBar = ()=>{
     </div>
     
     <div className="relative flex items-center ml-2 lg:ml-4">
-        <a href="/addPost" className="hover:pointer flex items-center justify-center w-12 h-12 text-base font-medium leading-normal text-center align-middle transition-colors duration-150 ease-in-out bg-transparent border border-solid shadow-none cursor-pointer rounded-2xl  text-black-maron border-black-maron hover:text-primary hover:bg-jaune active:text-primary focus:text-primary w-fit p-2">
+        <a href="/addPost" className="hover:pointer flex items-center justify-center w-12 h-12 text-base font-medium leading-normal text-center align-middle transition-colors duration-150 ease-in-out bg-transparent border border-solid shadow-none cursor-pointer rounded-2xl  text-black-maron border-black-maron hover:text-primary hover:bg-jaune active:text-primary focus:text-primary w-fit px-1">
             add post 
         </a>
     </div>
+    
+        <a href="/addPost" className="rounded-md border border-black p-1">
+            add post 
+        </a>
+   
     </div>
 </div>
   </div>

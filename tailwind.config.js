@@ -26,7 +26,8 @@ module.exports = {
         "bleu-ciel": "#c2d2e1",
         "orange": "#e35733",
         "jaune": "#fbbc3b",
-        "blanc": "#fbf7eb"
+        "blanc": "#FFFFF7",
+        "blanc1": "#fbf7eb"
       }
     },
   },
