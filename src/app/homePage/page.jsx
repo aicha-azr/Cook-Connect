@@ -27,15 +27,24 @@ useEffect(()=>{
   return (
     <>
      <div className='grid grid-rows-10 h-fit'>
-      <div className='border border-black h-fit'>
+      <div className='border border-black h-fit z-10'>
         <NavBar/>
       </div>
-      <div className='row-span-9 row-start-2 border border-red-800 grid grid-cols-4 bg-blue-400 h-screen'>
-         <div className='col-span-3 border-r border-black px-2 py-1'>
-          {!Array.is}
-            <Card/>
+      <div className='row-span-9 row-start-2 grid grid-cols-4  h-fit'>
+         <div className='lg:col-span-3 col-span-4 border-r border-bleu-ciel px-2 py-1 overflow-y-auto scroll-smooth h-screen flex flex-col gap-3'>
+          {!Array.isArray(data) || data.length === 0 ?( <div className='flex justify-center  mt-20'>
+              <div class="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-jaune justify-center"></div>
+            </div>
+            ) : (    data.map((item) => (  <>  
+              
+            <Card image={item.images} title={item.titre} description={item.contenu}  onClick={()=>{
+              handleClick(item._id)}} name={item.user.nom} date={item.date_publication}/>
+           
+            </>)
+            )
+            )}
           </div>   
-          <div className='col-span-1'></div>
+          <div className='col-span-1 hidden lg:block'>the menu</div>
       </div>
      </div>
      
