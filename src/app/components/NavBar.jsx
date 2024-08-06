@@ -69,15 +69,9 @@ const NavBar = ()=>{
         </a>
     </div>
     
-    <div className="relative flex items-center ml-2 lg:ml-4">
-        <a href="/addPost" className="hover:pointer flex items-center justify-center w-12 h-12 text-base font-medium leading-normal text-center align-middle transition-colors duration-150 ease-in-out bg-transparent border border-solid shadow-none cursor-pointer rounded-2xl  text-black-maron border-black-maron hover:text-primary hover:bg-jaune active:text-primary focus:text-primary w-fit px-1">
-            add post 
-        </a>
-    </div>
     
-        <a href="/addPost" className="rounded-md border border-black p-1">
-            add post 
-        </a>
+    
+       
    
     </div>
 </div>

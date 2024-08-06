@@ -9,6 +9,7 @@ import { fetchAllPosts, getPost } from '../redux/slices/postSlices/PostThunk';
 import NavBar from '../components/NavBar';
 import Card from '../components/Card'
 import requireAuth from '../requireAuth';
+import { CirclePlus, CircleUser, LogOut, StickyNote } from 'lucide-react';
 const Postpage = () => {
   requireAuth();
   const router = useRouter()
@@ -30,8 +31,8 @@ useEffect(()=>{
       <div className='border border-black h-fit z-10'>
         <NavBar/>
       </div>
-      <div className='row-span-9 row-start-2 grid grid-cols-4  h-fit'>
-         <div className='lg:col-span-3 col-span-4 border-r border-bleu-ciel px-2 py-1 overflow-y-auto scroll-smooth h-screen flex flex-col gap-3'>
+      <div className='row-span-9 row-start-2 grid grid-cols-5  h-fit'>
+         <div className='lg:col-span-4 col-span-4 border-r border-bleu-ciel px-2 py-1 overflow-y-auto scroll-smooth h-screen flex flex-col gap-3'>
           {!Array.isArray(data) || data.length === 0 ?( <div className='flex justify-center  mt-20'>
               <div class="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-jaune justify-center"></div>
             </div>
@@ -44,7 +45,18 @@ useEffect(()=>{
             )
             )}
           </div>   
-          <div className='col-span-1 hidden lg:block'>the menu</div>
+          <div className='col-span-1 hidden lg:block flex flex-col p-2'>
+            <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange '>
+            <CircleUser /> user name
+            </div>
+            <a href="/addPost" className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
+            <CirclePlus /> add post
+            </a> <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange  '>
+            <StickyNote />my posts
+            </div> <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
+            <LogOut /> Log Out
+            </div>
+          </div>
       </div>
      </div>
      
