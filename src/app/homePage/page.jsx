@@ -51,7 +51,7 @@ useEffect(()=>{
             )
             )}
           </div>   
-          <div className='col-span-1 hidden lg:block flex flex-col p-2'>
+          <div className='col-span-1 hidden lg:block flex flex-col p-2 mt-1'>
             <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange '>
             <CircleUser /> 
             {user?( <p>{user.nom}</p>
