@@ -51,8 +51,8 @@ const AddPost = () => {
     return (
         <>
             <NavBar />
-            <div className="bg-blanc mt-20 shadow p-4 py-8">
-                <div className="heading text-center font-bold text-2xl m-5 text-black-maron font-BodyFon">New Post</div>
+            <div className="bg-blanc mt-20 shadow p-4 py-8 font-serif">
+                <div className="heading text-center font-bold text-2xl m-5 text-black-maron font-serif">New Post</div>
                 <div className="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-bleu-ciel p-4 shadow-lg max-w-2xl">
                     <input className="title bg-bleu-ciel border border-gray-300 p-2 mb-4 outline-none" spellCheck="false" placeholder="Title" type="text" value={form.titre} onChange={(e) => setForm({ ...form, titre: e.target.value })} />
                     <textarea className="description bg-bleu-ciel sec p-3 h-60 border border-gray-300 outline-none" spellCheck="false" placeholder="Describe everything about this post here" value={form.contenu} onChange={(e) => setForm({ ...form, contenu: e.target.value })}></textarea>

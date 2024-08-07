@@ -12,6 +12,7 @@ module.exports = {
         fontFamily: {
           'BodyFont': ['Montserrat', 'sans-serif'],
           'HeadingFont': ['Playfair Display', 'serif'],
+         'playfair': ['"Playfair Display"', 'serif']
         },
       },
     },

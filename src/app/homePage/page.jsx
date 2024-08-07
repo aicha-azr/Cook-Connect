@@ -9,13 +9,19 @@ import { fetchAllPosts, getPost } from '../redux/slices/postSlices/PostThunk';
 import NavBar from '../components/NavBar';
 import Card from '../components/Card'
 import requireAuth from '../requireAuth';
-import { CirclePlus, CircleUser, LogOut, StickyNote } from 'lucide-react';
+import { CirclePlus, CircleUser, LogOut, Mail, StickyNote } from 'lucide-react';
+import getUserIdFromCookie from '../getUserIdFromCookie';
+import { getUser } from '../redux/slices/userSlices/UserThunk';
+import handleLogout from '../handleLogout';
 const Postpage = () => {
   requireAuth();
   const router = useRouter()
   const dispatch = useDispatch();
+  const userId = getUserIdFromCookie();
+  const {user} = useSelector((state) => state.users);
 useEffect(()=>{
   dispatch(fetchAllPosts());
+  dispatch(getUser(userId));
 }, [dispatch])
  const {data}   = useSelector((state) => state.posts); 
 
@@ -27,7 +33,7 @@ useEffect(()=>{
   };
   return (
     <>
-     <div className='grid grid-rows-10 h-fit'>
+     <div className='grid grid-rows-10 h-fit font-serif'>
       <div className='border border-black h-fit z-10'>
         <NavBar/>
       </div>
@@ -47,19 +53,28 @@ useEffect(()=>{
           </div>   
           <div className='col-span-1 hidden lg:block flex flex-col p-2'>
             <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange '>
-            <CircleUser /> user name
+            <CircleUser /> 
+            {user?( <p>{user.nom}</p>
+       ): (<p>no user found</p>)}
+            </div>
+            <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
+            <Mail /> {user?(<p>{user.email}</p>
+       ): (<p>no user found</p>)}
             </div>
             <a href="/addPost" className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
             <CirclePlus /> add post
-            </a> <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange  '>
+            </a>
+             <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange  '>
             <StickyNote />my posts
-            </div> <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
+            </div>
+             <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange' onClick={handleLogout}>
             <LogOut /> Log Out
             </div>
           </div>
       </div>
-     </div>
      
+     
+            </div>
     </>
   );
 };
