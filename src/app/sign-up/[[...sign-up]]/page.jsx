@@ -6,7 +6,7 @@ import SignUpForm from '../../components/SignUpForm'
 import brand from '../../../../public/assets/2.png'
 export default function Page() {
   return (<>
-   <header className=" inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-blanc py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
+   <header className=" inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-blanc py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg mt-1">
         <div className="px-4">
           <div className="flex items-center justify-between">
             <div className="flex shrink-0">
@@ -28,7 +28,7 @@ export default function Page() {
                 Login
               </a>
               <a
-                className="inline-flex items-center justify-center rounded-xl bg-jaune px-3 py-2 text-sm font-semibold text-blanc shadow-sm transition-all duration-150 hover:bg-bleu-ciel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="inline-flex items-center justify-center rounded-xl bg-jaune px-3 py-2 text-sm font-semibold text-black-maron shadow-sm transition-all duration-150 hover:bg-bleu-ciel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 href="/sign-up"
               >
                 Sign up
@@ -37,12 +37,12 @@ export default function Page() {
           </div>
         </div>
       </header>
-  <div className='flex justify-center mt-10 lg:mt-20 pt-2'>
+  <div className='flex justify-center lg:mt-2 pt-2'>
   <main className="flex items-center justify-center md:h-screen ">
       <div className=" flex items-center w-full max-w-[400px] flex-col  p-4 md:-mt-32">
        
           <div className="w-32 text-white flex  justify-center md:w-36">
-           <Image src={logo} width={400} height={400}/>
+           <Image src={logo} width={100} height={100}/>
           </div>
         
         <SignUpForm/>
