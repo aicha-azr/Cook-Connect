@@ -40,18 +40,31 @@ export const fetchAllUsers = createAsyncThunk(
     }
   );
 
+  const cacheDuration = 24 * 60 * 60 * 1000; // 5 minutes
+
+  const userCache = {};
+  
   export const getUser = createAsyncThunk(
-    'users/getoneUser',
-    async(id, {rejectWithValue}) =>{
-        try{
-            const response = await axios.get(`/api/users/${id}`);
-            console.log(response.data.user);
-            return response.data.user;
-        }catch(e){
-            return rejectWithValue('Failed to get the user')
-        }
-    }
+      'users/getoneUser',
+      async (id, { rejectWithValue }) => {
+          const cachedUser = userCache[id];
+          
+          if (cachedUser && (Date.now() - cachedUser.timestamp < cacheDuration)) {
+              return cachedUser.user; // Retourne l'utilisateur du cache s'il est encore valide
+          }
+  
+          try {
+              const response = await axios.get(`/api/users/${id}`);
+              const user = response.data.user;
+              userCache[id] = { user, timestamp: Date.now() }; // Mémorise avec un timestamp
+              console.log(user);
+              return user;
+          } catch (e) {
+              return rejectWithValue('Failed to get the user');
+          }
+      }
   );
+  
 
   export const deleteUser = createAsyncThunk(
     'users/deleteUser',

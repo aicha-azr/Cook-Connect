@@ -19,6 +19,7 @@ const Postpage = () => {
   const dispatch = useDispatch();
   const userId = getUserIdFromCookie();
   const {user} = useSelector((state) => state.users);
+  
 useEffect(()=>{
   dispatch(fetchAllPosts());
   dispatch(getUser(userId));
