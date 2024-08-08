@@ -9,7 +9,7 @@ import { fetchAllPosts, getPost } from '../redux/slices/postSlices/PostThunk';
 import NavBar from '../components/NavBar';
 import Card from '../components/Card'
 import requireAuth from '../requireAuth';
-import { CirclePlus, CircleUser, LogOut, Mail, StickyNote } from 'lucide-react';
+import { CirclePlus, CircleUser, LogOut, Mail, Search, StickyNote } from 'lucide-react';
 import getUserIdFromCookie from '../getUserIdFromCookie';
 import { getUser } from '../redux/slices/userSlices/UserThunk';
 import handleLogout from '../handleLogout';
@@ -38,8 +38,18 @@ useEffect(()=>{
       <div className='border border-black h-fit z-10'>
         <NavBar/>
       </div>
-      <div className='row-span-9 row-start-2 grid grid-cols-5  h-fit'>
-         <div className='lg:col-span-4 col-span-4 border-r border-bleu-ciel px-2 py-1 overflow-y-auto scroll-smooth h-screen flex flex-col gap-3'>
+      <div className='lg:hidden flex p-3  w-full items-center justify-center '>
+        <div className='flex flex-row items-center border border-jaune text-black-maron rounded-full py-2 mx-2 px-3 w-full'>
+                    <Search className="mr-1" />
+                    <input 
+                        type='text' 
+                        placeholder='search...' 
+                        className='focus:outline-none focus:ring-0 focus:ring-bleu-ciel focus:border-none border-none px-2 text-black  w-full'
+                    />
+                </div>    
+                </div> 
+      <div className='row-span-9 lg:row-start-2 grid grid-cols-5  h-fit'>
+         <div className='lg:col-span-4 col-span-5 lg:border-r border-bleu-ciel px-2 py-1 overflow-y-auto scroll-smooth h-screen flex flex-col gap-3'>
           {!Array.isArray(data) || data.length === 0 ?( <div className='flex justify-center  mt-20'>
               <div class="w-16 h-16 border-8 border-dashed rounded-full animate-spin border-jaune justify-center"></div>
             </div>
