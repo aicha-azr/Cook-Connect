@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from '../redux/slices/postSlices/PostThunk';
 import requireAuth from "../requireAuth";
 import NavBar from "../components/NavBar";
+import { CirclePlus, CircleUser, LogOut, Mail, StickyNote } from "lucide-react";
+import handleLogout from "../handleLogout";
+import getUserIdFromCookie from "../getUserIdFromCookie";
+import { getUser } from "../redux/slices/userSlices/UserThunk";
 const Post = ({params})=>{
     requireAuth();
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +22,12 @@ const Post = ({params})=>{
     useEffect(()=>{
         console.log(id);
       dispatch(getPost(id));
+      dispatch(getUser(userId));
     }, [id, dispatch])
+    requireAuth();
+    const userId = getUserIdFromCookie();
+    const {user} = useSelector((state) => state.users);
+
      const {post} = useSelector((state) => state.posts);
      console.log(post); 
     const toggleMenu = () => {
@@ -40,8 +49,12 @@ const Post = ({params})=>{
       };
     return(
         <>
+        <div className="grid grid-rows-10 h-fit font-serif border border-black">
+        <div className="row-span-1">
      <NavBar />
- 
+     </div>
+        <div className='row-span-9 grid grid-cols-5 h-fit font-serif'>
+    <div className="lg:col-span-4 col-span-5 lg:border-r border-bleu-ciel h-screen max-h-fit overflow-y-auto scroll-smooth">
      {!post? ( 
         <div className='flex justify-center w-screen'>
 
@@ -50,16 +63,16 @@ const Post = ({params})=>{
             ) :
             (
  
-<div className=" max-w-7xl mx-auto px-4 sm:px-6 mt-20 lg:px-8">
+<div className=" max-w-7xl px-4 sm:px-6 ">
     <div className="max-w-3xl mx-auto">
         
         <div className="py-8">
             <h1 className="text-3xl font-bold mb-2">{post.titre}</h1>
-            <p className="text-gray-500 text-sm">Published on {formatDate(post.date_publication)}</p>
+            <p className="text-bleu-ciel text-sm">Published on {formatDate(post.date_publication)}</p>
         </div>
 
         {post.images && post.images.map((image, index) => (
-    <Image key={index} src={image}  layout="responsive" width={150} height={100} alt={`Featured image ${index}`} className="w-full h-auto mb-8"/>
+    <Image key={index} src={image}  layout="responsive" width={200} height={200} alt={`Featured image ${index}`} className=""/>
 ))}
 
 
@@ -92,7 +105,7 @@ const Post = ({params})=>{
             </div>
 
   {/** */}          
-<section className="bg-blanc py-8 lg:py-16 antialiased">
+<div className="bg-blanc py-8 lg:py-16 antialiased">
   <div className="max-w-2xl mx-auto px-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
@@ -210,7 +223,32 @@ const Post = ({params})=>{
     </article>
    
   </div>
-</section>
+</div>
+</div>
+
+
+<div className='col-span-1 hidden lg:block flex flex-col p-2 mt-1'>
+            <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange '>
+            <CircleUser /> 
+            {user?( <p>{user.nom}</p>
+       ): (<p>no user found</p>)}
+            </div>
+            <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
+            <Mail /> {user?(<p>{user.email}</p>
+       ): (<p>no user found</p>)}
+            </div>
+            <a href="/addPost" className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange'>
+            <CirclePlus /> add post
+            </a>
+             <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange  '>
+            <StickyNote />my posts
+            </div>
+             <div className='flex border-b border-bleu-ciel py-1.5 gap-3 hover:cursor-pointer hover:text-orange' onClick={handleLogout}>
+            <LogOut /> Log Out
+            </div>
+          </div>
+       </div>
+       </div>
         </>
     ) 
 }

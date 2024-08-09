@@ -36,7 +36,7 @@ const UserForm = () => {
     <>
       <section className="flex flex-col items-center pt-6 w-full">
    
-     <div className="p-6  md:space-y-6 sm:p-8 w-fit border border-bleu-ciel rounded-xl flex flex-col ">
+     <div className="p-6  md:space-y-6 sm:p-8 w-fit border border-bleu-ciel rounded-xl flex flex-col shadow shadow-md ">
        <h1 className="text-xl font-bold leading-tight tracking-tight text-black-maron md:text-2xl dark:text-white">Create an
          account
        </h1>
@@ -65,7 +65,7 @@ const UserForm = () => {
           required={true}
           value={mot_de_passe}/>
          </div>
-         <button type="submit" className="w-full rounded-xl bg-black-maron px-3 py-2 text-jaune font-bold focus:bg-gray-600 focus:outline-none">Create an account</button>
+         <button type="submit" className="w-full rounded-xl bg-black-maron px-3 py-2 text-jaune font-bold focus:bg-gray-600 focus:outline-none">Sign up</button>
          <p className="text-center text-sm text-black-maron">Already have an account? <a
              className="font-medium text-orange hover:underline dark:text-blue-500" href="/login">Sign in here</a>
          </p>

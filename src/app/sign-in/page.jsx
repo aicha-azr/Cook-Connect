@@ -92,7 +92,7 @@ function setCookie(name, value, days) {
             
             <p className=" text-black">Log in below to access your account</p>
         </div>
-            <form action="post" onSubmit={handleLogin}>
+            <form onSubmit={handleLogin}>
                 <div className="flex gap-0.5 flex-col">
                    <label for="email" className="text-sm">Email Address</label>
                     <input type="email" name="email" id="email" placeholder="Email Address" className="peer rounded-xl bg-blanc mt-1 w-full border-b-2 border-bleu-ciel px-1 focus:ring-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
